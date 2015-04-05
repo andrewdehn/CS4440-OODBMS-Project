@@ -5,7 +5,7 @@ public class SimpleCar {
 	private String make;
 	private String model;
 	private int year;
-	private String vin;
+	private String vin;		// This should probably be the primary key
 	private CarColor color;
 	
 	public SimpleCar(String make, String model, int year, String vin, CarColor color) {

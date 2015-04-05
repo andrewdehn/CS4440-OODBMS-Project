@@ -9,6 +9,12 @@ import edu.gatech.cs4440.spring2015.model.SimpleCar;
  * @author Andrew
  */
 public interface DatabaseTestModule {
+	
+	/**
+	 * Name of the database this module tests.
+	 * @return
+	 */
+	public String databaseName();
 
 	/**
 	 * Sets up and initalizes any resources and connections needed for the database.
