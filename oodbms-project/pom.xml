@@ -5,6 +5,14 @@
 	<artifactId>oodbms-project</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
+	<repositories>
+		<repository>
+			<id>objectdb</id>
+			<name>ObjectDB Repository</name>
+			<url>http://m2.objectdb.com</url>
+		</repository>
+	</repositories>
+
 
 	<dependencies>
 		<dependency>
@@ -18,6 +26,19 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.6</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.objectdb</groupId>
+			<artifactId>objectdb</artifactId>
+			<version>2.6.1_04</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jfree</groupId>
+			<artifactId>jfreechart</artifactId>
+			<version>1.0.19</version>
+		</dependency>
+
 
 	</dependencies>
 
