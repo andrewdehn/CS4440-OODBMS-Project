@@ -43,9 +43,7 @@ public class DatabaseTest {
 	/** 
 	 * Performs the tests.
 	 */
-	public TestResult test() {
-		SimpleCarGenerator simpleCarGenerator = new SimpleCarGenerator();
-		SimpleCar[] simpleCars = simpleCarGenerator.generate(numObjects);
+	public TestResult test(SimpleCar[] simpleCars) {
 		
 		int numExceptions = 0;
 		long time1, time2;

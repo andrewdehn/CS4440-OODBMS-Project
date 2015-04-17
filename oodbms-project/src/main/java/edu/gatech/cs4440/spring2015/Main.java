@@ -2,6 +2,8 @@ package edu.gatech.cs4440.spring2015;
 
 import java.io.IOException;
 
+import edu.gatech.cs4440.spring2015.generator.SimpleCarGenerator;
+import edu.gatech.cs4440.spring2015.model.SimpleCar;
 import edu.gatech.cs4440.spring2015.testing.DatabaseTestModule;
 import edu.gatech.cs4440.spring2015.testing.DummyTestModule;
 import edu.gatech.cs4440.spring2015.testing.ObjectDBTestModule;
@@ -24,12 +26,16 @@ public class Main {
 		for(int i = 0; i < dbTestModules.length; i++) {
 			dbNames[i] = dbTestModules[i].databaseName();
 		}
+		
+		SimpleCarGenerator simpleCarGenerator = new SimpleCarGenerator();
 		StatisticsGrapher grapher = new StatisticsGrapher(dbNames);
 		
-		for(DatabaseTestModule dbTestModule : dbTestModules) {
-			for(int objNum : objNums) {
+		for(int objNum : objNums) {
+			SimpleCar[] simpleCars = simpleCarGenerator.generate(objNum);
+			
+			for(DatabaseTestModule dbTestModule : dbTestModules) {
 				DatabaseTest dbTest = new DatabaseTest(prestart, numTests, objNum, dbTestModule);
-				DatabaseTest.TestResult result = dbTest.test();
+				DatabaseTest.TestResult result = dbTest.test(simpleCars);
 				grapher.addTestResults(dbTestModule.databaseName(), objNum, result);
 			}
 			
