@@ -42,10 +42,13 @@ public class ObjectDBTestModule implements DatabaseTestModule {
 
 	@Override
 	public void clean() throws DatabaseTestException {
-		em.close();
-		emf.close();
-		emf = Persistence.createEntityManagerFactory(dbUrl, properties);
-		em = emf.createEntityManager();
+//		em.close();
+//		emf.close();
+//		emf = Persistence.createEntityManagerFactory(dbUrl, properties);
+//		em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.createQuery("DELETE FROM Object").executeUpdate();
+		em.getTransaction().commit();
 	}
 
 	@Override

@@ -30,7 +30,7 @@ public class DummyTestModule implements DatabaseTestModule {
 	@Override
 	public void add(SimpleCar[] cars) throws DatabaseTestException {
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(10);
 		} catch (InterruptedException e) {
 			throw new DatabaseTestException(e);
 		}
@@ -39,7 +39,7 @@ public class DummyTestModule implements DatabaseTestModule {
 	@Override
 	public void update(SimpleCar[] cars) throws DatabaseTestException {
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(10);
 		} catch (InterruptedException e) {
 			throw new DatabaseTestException(e);
 		}
@@ -48,7 +48,7 @@ public class DummyTestModule implements DatabaseTestModule {
 	@Override
 	public void query(SimpleCar[] cars) throws DatabaseTestException {
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(10);
 		} catch (InterruptedException e) {
 			throw new DatabaseTestException(e);
 		}
@@ -57,7 +57,7 @@ public class DummyTestModule implements DatabaseTestModule {
 	@Override
 	public void remove(SimpleCar[] cars) throws DatabaseTestException {
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(10);
 		} catch (InterruptedException e) {
 			throw new DatabaseTestException(e);
 		}

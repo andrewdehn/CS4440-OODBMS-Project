@@ -67,7 +67,7 @@ public class DatabaseTest {
 			e.printStackTrace();
 		}
 		
-		System.out.println("Running add tests for " + dbTestModule.databaseName());
+		System.out.println("Running add tests for " + dbTestModule.databaseName() + " with " + simpleCars.length + " objects");
 		numExceptions = 0;
 		for(int i = 0; i < numTests; i++) {
 			for(int j = 0; j < prestart; j++) {
@@ -93,7 +93,7 @@ public class DatabaseTest {
 				time2 = System.nanoTime();
 				
 				addTimes[i] = (((double) time2) - ((double) time1)) * 1e-6;
-				System.out.println("add test " + i + ": " + addTimes[i]);
+//				System.out.println("add test " + i + ": " + addTimes[i]);
 			} catch (DatabaseTestException e) {
 				System.out.println("Exception during " + dbTestModule.databaseName() + " add testing");
 				e.printStackTrace();
@@ -103,7 +103,7 @@ public class DatabaseTest {
 		}
 		
 		
-		System.out.println("Running update tests for " + dbTestModule.databaseName());
+		System.out.println("Running update tests for " + dbTestModule.databaseName() + " with " + simpleCars.length + " objects");
 		numExceptions = 0;
 		for(int i = 0; i < numTests; i++) {
 			for(int j = 0; j < prestart; j++) {
@@ -131,7 +131,7 @@ public class DatabaseTest {
 				time2 = System.nanoTime();
 				
 				updateTimes[i] = (((double) time2) - ((double) time1)) * 1e-6;
-				System.out.println("update test " + i + ": " + updateTimes[i]);
+//				System.out.println("update test " + i + ": " + updateTimes[i]);
 			} catch (DatabaseTestException e) {
 				System.out.println("Exception during " + dbTestModule.databaseName() + " update testing");
 				e.printStackTrace();
@@ -140,7 +140,7 @@ public class DatabaseTest {
 			}
 		}
 		
-		System.out.println("Running query tests for " + dbTestModule.databaseName());
+		System.out.println("Running query tests for " + dbTestModule.databaseName() + " with " + simpleCars.length + " objects");
 		numExceptions = 0;
 		for(int i = 0; i < numTests; i++) {
 			for(int j = 0; j < prestart; j++) {
@@ -168,7 +168,7 @@ public class DatabaseTest {
 				time2 = System.nanoTime();
 				
 				queryTimes[i] = (((double) time2) - ((double) time1)) * 1e-6;
-				System.out.println("update test " + i + ": " + queryTimes[i]);
+//				System.out.println("update test " + i + ": " + queryTimes[i]);
 			} catch (DatabaseTestException e) {
 				System.out.println("Exception during " + dbTestModule.databaseName() + " query testing");
 				e.printStackTrace();
@@ -177,7 +177,7 @@ public class DatabaseTest {
 			}
 		}
 		
-		System.out.println("Running remove tests for " + dbTestModule.databaseName());
+		System.out.println("Running remove tests for " + dbTestModule.databaseName() + " with " + simpleCars.length + " objects");
 		numExceptions = 0;
 		for(int i = 0; i < numTests; i++) {
 			for(int j = 0; j < prestart; j++) {
@@ -205,7 +205,7 @@ public class DatabaseTest {
 				time2 = System.nanoTime();
 				
 				removeTimes[i] = (((double) time2) - ((double) time1)) * 1e-6;
-				System.out.println("remove test " + i + ": " + removeTimes[i]);
+//				System.out.println("remove test " + i + ": " + removeTimes[i]);
 			} catch (DatabaseTestException e) {
 				System.out.println("Exception during " + dbTestModule.databaseName() + " remove testing");
 				e.printStackTrace();
