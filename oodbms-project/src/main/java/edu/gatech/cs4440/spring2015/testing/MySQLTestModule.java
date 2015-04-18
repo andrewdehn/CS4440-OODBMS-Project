@@ -7,7 +7,7 @@ public class MySQLTestModule implements DatabaseTestModule {
 
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	static final String DB_URL = "jdbc:mysql://localhost/STUDENTS";
+	static final String DB_URL = "jdbc:mysql://localhost/Cars";
 
 	Connection conn = null;
 	Statement stmt = null;
@@ -22,11 +22,24 @@ public class MySQLTestModule implements DatabaseTestModule {
 	public void setup() throws DatabaseTestException {
 		// TODO Auto-generated method stub
 		//STEP 2: Register JDBC driver
-		Class.forName("com.mysql.jdbc.Driver");
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		}
+		catch(ClassNotFoundException ex) {
+			System.out.println("Error: unable to load driver class!");
+			System.exit(1);
+		}
 
 		System.out.println("Connecting to a selected database...");
-		conn = DriverManager.getConnection(DB_URL, USER, PASS);
-		System.out.println("Connected database successfully...");
+		try
+		{
+			conn = DriverManager.getConnection(DB_URL);
+			System.out.println("Connected database successfully...");
+		}
+		catch(SQLException e)
+		{
+			throw new DatabaseTestException(e);
+		}
 	}
 
 	@Override
@@ -154,12 +167,12 @@ public class MySQLTestModule implements DatabaseTestModule {
 		try
 		{
 			stmt = conn.createStatement();
-			
+
 			for(int i =0; i < cars.length; i++)
 			{
-			String sql = "DELETE FROM Cars " +
-					"WHERE VIN = " + cars[i].getVin();
-			stmt.executeUpdate(sql);
+				String sql = "DELETE FROM Cars " +
+						"WHERE VIN = " + cars[i].getVin();
+				stmt.executeUpdate(sql);
 			}
 		}
 		catch(SQLException e)
@@ -170,4 +183,4 @@ public class MySQLTestModule implements DatabaseTestModule {
 
 }
 
-}
+
