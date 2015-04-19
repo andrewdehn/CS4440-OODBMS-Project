@@ -30,10 +30,10 @@ public class MySQLTestModule implements DatabaseTestModule {
 			System.exit(1);
 		}
 
-		System.out.println("Connecting to a selected database...");
+		//System.out.println("Connecting to a selected database...");
 		try
 		{
-			conn = DriverManager.getConnection(DB_URL);
+			conn = DriverManager.getConnection(DB_URL,"root","");
 			System.out.println("Connected database successfully...");
 		}
 		catch(SQLException e)
@@ -58,7 +58,7 @@ public class MySQLTestModule implements DatabaseTestModule {
 	public void clean() throws DatabaseTestException {
 		// TODO 'delete from MyTable'
 		//STEP 4: Execute a query
-		System.out.println("Creating statement...");
+		//System.out.println("Creating statement...");
 		try{
 			stmt = conn.createStatement();
 			String sql = "DELETE FROM Cars";
@@ -74,16 +74,17 @@ public class MySQLTestModule implements DatabaseTestModule {
 	public void add(SimpleCar[] cars) throws DatabaseTestException {
 		// TODO add all of cars in car array
 		//STEP 4: Execute a query
-		System.out.println("Inserting records into the table...");
+		//System.out.println("Inserting records into the table...");
 		try{
 			stmt = conn.createStatement();
 
 			for(int i=0; i< cars.length; i++)
 			{
-				String sql = "INSERT INTO Cars " +
-						"VALUES (" + cars[i].getVin() +"," + 
-						cars[i].getMake() + "," + cars[i].getModel() + ","
-						+ cars[i].getColor() + "," + cars[i].getYear()+ ")";
+				String sql = "INSERT INTO cars " +
+						"VALUES (\"" + cars[i].getVin() +"\",\"" + 
+						cars[i].getMake() + "\",\"" + cars[i].getModel() + "\",\""
+						+ cars[i].getColor() + "\"," + cars[i].getYear()+ ")";
+				//System.out.println(sql);
 				stmt.executeUpdate(sql);
 			}
 		}
@@ -100,18 +101,18 @@ public class MySQLTestModule implements DatabaseTestModule {
 		// update where vin = cars[i].getVin 
 		// set color = getColor, make = getMake, model = getModel, year = getYear
 
-		System.out.println("Creating statement...");
+		//System.out.println("Creating statement...");
 		try
 		{
 			stmt = conn.createStatement();
 			for(int i = 0; i < cars.length; i++)
 			{
 				String sql = "UPDATE Cars " +
-						"SET make = " + cars[i].getMake() + 
-						", model = " + cars[i].getModel() +
-						", color = " + cars[i].getColor() +
+						"SET make = \"" + cars[i].getMake() + "\"" +
+						", model = \"" + cars[i].getModel() + "\"" +
+						", color = \"" + cars[i].getColor() + "\"" +
 						", year = " + cars[i].getYear() +
-						"WHERE VIN = " + cars[i].getVin();
+						" WHERE VIN = \"" + cars[i].getVin() + "\"";
 				stmt.executeUpdate(sql);
 			}
 		}
@@ -125,7 +126,7 @@ public class MySQLTestModule implements DatabaseTestModule {
 	@Override
 	public void query(SimpleCar[] cars) throws DatabaseTestException {
 		//STEP 4: Execute a query
-		System.out.println("Creating statement...");
+		//System.out.println("Creating statement...");
 
 		try
 		{
@@ -133,8 +134,8 @@ public class MySQLTestModule implements DatabaseTestModule {
 			ResultSet rs = null;
 			for(int i=0; i < cars.length; i++)
 			{
-				String sql = "SELECT VIN, make, model, color, year FROM Cars WHERE VIN = " 
-						+ cars[i].getVin();
+				String sql = "SELECT VIN, make, model, color, year FROM Cars WHERE VIN = \"" 
+						+ cars[i].getVin() + "\"";
 				rs = stmt.executeQuery(sql);
 				//STEP 5: Extract data from result set
 				rs.next();
@@ -146,11 +147,11 @@ public class MySQLTestModule implements DatabaseTestModule {
 				String color = rs.getString("color");
 
 				//Display values
-				System.out.print("VIN: " + VIN);
-				System.out.print(", Make: " + make);
-				System.out.print(", Model: " + model);
-				System.out.println(", Color: " + color);
-				System.out.println(", Year: " + year);
+				//System.out.print("VIN: " + VIN);
+				//System.out.print(", Make: " + make);
+				//System.out.print(", Model: " + model);
+				//System.out.println(", Color: " + color);
+				//System.out.println(", Year: " + year);
 			}
 			rs.close();
 		} catch (SQLException e){
@@ -163,7 +164,7 @@ public class MySQLTestModule implements DatabaseTestModule {
 	public void remove(SimpleCar[] cars) throws DatabaseTestException {
 		// TODO for entire array, delete each row
 		//STEP 4: Execute a query
-		System.out.println("Creating statement...");
+		//System.out.println("Creating statement...");
 		try
 		{
 			stmt = conn.createStatement();
@@ -171,7 +172,7 @@ public class MySQLTestModule implements DatabaseTestModule {
 			for(int i =0; i < cars.length; i++)
 			{
 				String sql = "DELETE FROM Cars " +
-						"WHERE VIN = " + cars[i].getVin();
+						"WHERE VIN = \"" + cars[i].getVin() + "\"";
 				stmt.executeUpdate(sql);
 			}
 		}
