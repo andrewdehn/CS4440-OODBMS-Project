@@ -6,11 +6,11 @@ import javax.persistence.Id;
 @Entity
 public class SimpleCar {
 	
-	private String make;
-	private String model;
-	private int year;
-	@Id	private String vin;		// This should probably be the primary key
-	private CarColor color;
+	protected String make;
+	protected String model;
+	protected int year;
+	@Id	protected String vin;		// This should probably be the primary key
+	protected CarColor color;
 	
 	public SimpleCar(String make, String model, int year, String vin, CarColor color) {
 		this.make = make;
