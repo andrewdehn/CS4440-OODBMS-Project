@@ -59,7 +59,7 @@ public class StatisticsGrapher {
 		}
 	}
 
-	public void addTestResults(String dbName, int objNum, DatabaseTest.TestResult result) {
+	public void addTestResults(String dbName, int objNum, TestResult result) {
 		numbers.add(objNum);
 
 		addMeans.get(dbName).put(objNum, result.getAddMean());

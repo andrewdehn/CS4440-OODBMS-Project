@@ -34,7 +34,7 @@ public class MySQLTestModule implements DatabaseTestModule {
 		try
 		{
 			conn = DriverManager.getConnection(DB_URL,"root","");
-			System.out.println("Connected database successfully...");
+//			System.out.println("Connected database successfully...");
 		}
 		catch(SQLException e)
 		{
@@ -78,14 +78,24 @@ public class MySQLTestModule implements DatabaseTestModule {
 		try{
 			stmt = conn.createStatement();
 
+			String sql = "INSERT INTO SimpleCar VALUES (?,?,?,?,?);";
+			PreparedStatement statement = conn.prepareStatement(sql);
+			
 			for(int i=0; i< cars.length; i++)
 			{
-				String sql = "INSERT INTO SimpleCar " +
-						"VALUES (\"" + cars[i].getVin() +"\",\"" + 
-						cars[i].getMake() + "\",\"" + cars[i].getModel() + "\",\""
-						+ cars[i].getColor() + "\"," + cars[i].getYear()+ ")";
+//				String sql = "INSERT INTO SimpleCar " +
+//						"VALUES (\"" + cars[i].getVin() +"\",\"" + 
+//						cars[i].getMake() + "\",\"" + cars[i].getModel() + "\",\""
+//						+ cars[i].getColor() + "\"," + cars[i].getYear()+ ")";
 				//System.out.println(sql);
-				stmt.executeUpdate(sql);
+//				stmt.executeUpdate(sql);
+				
+				statement.setString(1, cars[i].getVin());
+				statement.setString(2, cars[i].getMake());
+				statement.setString(3, cars[i].getModel());
+				statement.setString(4, cars[i].getColor().toString());
+				statement.setInt(5, cars[i].getYear());
+				statement.executeUpdate();
 			}
 		}
 		catch(SQLException e)
@@ -105,15 +115,26 @@ public class MySQLTestModule implements DatabaseTestModule {
 		try
 		{
 			stmt = conn.createStatement();
+			
+			String sql = "UPDATE SimpleCar SET make = ?, model = ?, color = ?, year = ? WHERE VIN = ?;";
+			PreparedStatement statement = conn.prepareStatement(sql);
+			
 			for(int i = 0; i < cars.length; i++)
 			{
-				String sql = "UPDATE SimpleCar " +
-						"SET make = \"" + cars[i].getMake() + "\"" +
-						", model = \"" + cars[i].getModel() + "\"" +
-						", color = \"" + cars[i].getColor() + "\"" +
-						", year = " + cars[i].getYear() +
-						" WHERE VIN = \"" + cars[i].getVin() + "\"";
-				stmt.executeUpdate(sql);
+//				String sql = "UPDATE SimpleCar " +
+//						"SET make = \"" + cars[i].getMake() + "\"" +
+//						", model = \"" + cars[i].getModel() + "\"" +
+//						", color = \"" + cars[i].getColor() + "\"" +
+//						", year = " + cars[i].getYear() +
+//						" WHERE VIN = \"" + cars[i].getVin() + "\"";
+//				stmt.executeUpdate(sql);
+				
+				statement.setString(1, cars[i].getMake());
+				statement.setString(2, cars[i].getModel());
+				statement.setString(3, cars[i].getColor().toString());
+				statement.setInt(4, cars[i].getYear());
+				statement.setString(5, cars[i].getVin());
+				statement.executeUpdate();
 			}
 		}
 		catch(SQLException e)
@@ -131,12 +152,20 @@ public class MySQLTestModule implements DatabaseTestModule {
 		try
 		{
 			stmt = conn.createStatement();
+			
+			String sql = "SELECT VIN, make, model, color, year FROM SimpleCar WHERE VIN = ?;";
+			PreparedStatement statement = conn.prepareStatement(sql);
+			
 			ResultSet rs = null;
 			for(int i=0; i < cars.length; i++)
 			{
-				String sql = "SELECT VIN, make, model, color, year FROM SimpleCar WHERE VIN = \"" 
-						+ cars[i].getVin() + "\"";
-				rs = stmt.executeQuery(sql);
+//				String sql = "SELECT VIN, make, model, color, year FROM SimpleCar WHERE VIN = \"" 
+//						+ cars[i].getVin() + "\"";
+//				rs = stmt.executeQuery(sql);
+				
+				statement.setString(1, cars[i].getVin());
+				rs = statement.executeQuery();
+				
 				//STEP 5: Extract data from result set
 				rs.next();
 				//Retrieve by column name
@@ -168,12 +197,17 @@ public class MySQLTestModule implements DatabaseTestModule {
 		try
 		{
 			stmt = conn.createStatement();
+			
+			String sql = "DELETE FROM SimpleCar WHERE VIN = ?;";
+			PreparedStatement statement = conn.prepareStatement(sql);
 
 			for(int i =0; i < cars.length; i++)
 			{
-				String sql = "DELETE FROM SimpleCar " +
-						"WHERE VIN = \"" + cars[i].getVin() + "\"";
-				stmt.executeUpdate(sql);
+//				String sql = "DELETE FROM SimpleCar " +
+//						"WHERE VIN = \"" + cars[i].getVin() + "\"";
+//				stmt.executeUpdate(sql);
+				statement.setString(1, cars[i].getVin());
+				statement.executeUpdate();
 			}
 		}
 		catch(SQLException e)
