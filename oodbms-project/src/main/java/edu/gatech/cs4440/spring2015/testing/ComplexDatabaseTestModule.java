@@ -1,15 +1,10 @@
 package edu.gatech.cs4440.spring2015.testing;
 
+import edu.gatech.cs4440.spring2015.model.ComplexCar;
 import edu.gatech.cs4440.spring2015.model.SimpleCar;
 
-/**
- * An interface that defines the database interactions used for testing 
- * database speed.
- * 
- * @author Andrew
- */
-public interface DatabaseTestModule {
-	
+public interface ComplexDatabaseTestModule {
+
 	/**
 	 * Name of the database this module tests.
 	 * @return
@@ -46,7 +41,7 @@ public interface DatabaseTestModule {
 	 * 
 	 * @throws DatabaseTestException Action did not complete properly
 	 */
-	public void add(SimpleCar[] cars) throws DatabaseTestException;
+	public void add(ComplexCar[] cars) throws DatabaseTestException;
 	
 	/**
 	 * Updates the given cars in the database.
@@ -54,7 +49,7 @@ public interface DatabaseTestModule {
 	 * 
 	 * @throws DatabaseTestException Action did not complete properly
 	 */
-	public void update(SimpleCar[] cars) throws DatabaseTestException;
+	public void update(ComplexCar[] cars) throws DatabaseTestException;
 	
 	/**
 	 * Query or retrieve the given cars from the database.
@@ -62,7 +57,7 @@ public interface DatabaseTestModule {
 	 * 
 	 * @throws DatabaseTestException Action did not complete properly
 	 */
-	public void query(SimpleCar[] cars) throws DatabaseTestException;
+	public void query(ComplexCar[] cars) throws DatabaseTestException;
 	
 	/**
 	 * Remove the given cars from the database.
@@ -70,6 +65,7 @@ public interface DatabaseTestModule {
 	 * 
 	 * @throws DatabaseTestException Action did not complete properly
 	 */
-	public void remove(SimpleCar[] cars) throws DatabaseTestException;
+	public void remove(ComplexCar[] cars) throws DatabaseTestException;
 
+	
 }

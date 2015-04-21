@@ -1,12 +1,16 @@
 package edu.gatech.cs4440.spring2015.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class SimpleCar {
 	
-	private String make;
-	private String model;
-	private int year;
-	private String vin;
-	private CarColor color;
+	protected String make;
+	protected String model;
+	protected int year;
+	@Id	protected String vin;		// This should probably be the primary key
+	protected CarColor color;
 	
 	public SimpleCar(String make, String model, int year, String vin, CarColor color) {
 		this.make = make;
@@ -66,4 +70,50 @@ public class SimpleCar {
 		builder.append(vin);
 		return builder.toString();
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((color == null) ? 0 : color.hashCode());
+		result = prime * result + ((make == null) ? 0 : make.hashCode());
+		result = prime * result + ((model == null) ? 0 : model.hashCode());
+		result = prime * result + ((vin == null) ? 0 : vin.hashCode());
+		result = prime * result + year;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof SimpleCar))
+			return false;
+		SimpleCar other = (SimpleCar) obj;
+		if (color != other.color)
+			return false;
+		if (make == null) {
+			if (other.make != null)
+				return false;
+		} else if (!make.equals(other.make))
+			return false;
+		if (model == null) {
+			if (other.model != null)
+				return false;
+		} else if (!model.equals(other.model))
+			return false;
+		if (vin == null) {
+			if (other.vin != null)
+				return false;
+		} else if (!vin.equals(other.vin))
+			return false;
+		if (year != other.year)
+			return false;
+		return true;
+	}
+	
+	
+	
 }

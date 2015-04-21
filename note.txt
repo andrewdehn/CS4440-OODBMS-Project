@@ -1,0 +1,1 @@
+ColorCar class added getter method return String
