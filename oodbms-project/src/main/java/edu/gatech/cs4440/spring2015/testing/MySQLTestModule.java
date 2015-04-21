@@ -61,7 +61,7 @@ public class MySQLTestModule implements DatabaseTestModule {
 		//System.out.println("Creating statement...");
 		try{
 			stmt = conn.createStatement();
-			String sql = "DELETE FROM Cars";
+			String sql = "DELETE FROM SimpleCar";
 			stmt.executeUpdate(sql);
 		}
 		catch(SQLException e)
@@ -80,7 +80,7 @@ public class MySQLTestModule implements DatabaseTestModule {
 
 			for(int i=0; i< cars.length; i++)
 			{
-				String sql = "INSERT INTO cars " +
+				String sql = "INSERT INTO SimpleCar " +
 						"VALUES (\"" + cars[i].getVin() +"\",\"" + 
 						cars[i].getMake() + "\",\"" + cars[i].getModel() + "\",\""
 						+ cars[i].getColor() + "\"," + cars[i].getYear()+ ")";
@@ -107,7 +107,7 @@ public class MySQLTestModule implements DatabaseTestModule {
 			stmt = conn.createStatement();
 			for(int i = 0; i < cars.length; i++)
 			{
-				String sql = "UPDATE Cars " +
+				String sql = "UPDATE SimpleCar " +
 						"SET make = \"" + cars[i].getMake() + "\"" +
 						", model = \"" + cars[i].getModel() + "\"" +
 						", color = \"" + cars[i].getColor() + "\"" +
@@ -134,17 +134,17 @@ public class MySQLTestModule implements DatabaseTestModule {
 			ResultSet rs = null;
 			for(int i=0; i < cars.length; i++)
 			{
-				String sql = "SELECT VIN, make, model, color, year FROM Cars WHERE VIN = \"" 
+				String sql = "SELECT VIN, make, model, color, year FROM SimpleCar WHERE VIN = \"" 
 						+ cars[i].getVin() + "\"";
 				rs = stmt.executeQuery(sql);
 				//STEP 5: Extract data from result set
 				rs.next();
 				//Retrieve by column name
-				String VIN  = rs.getString("VIN");
-				int year = rs.getInt("year");
-				String make = rs.getString("make");
-				String model = rs.getString("model");
-				String color = rs.getString("color");
+				//String VIN  = rs.getString("VIN");
+				//int year = rs.getInt("year");
+				//String make = rs.getString("make");
+				//String model = rs.getString("model");
+				//String color = rs.getString("color");
 
 				//Display values
 				//System.out.print("VIN: " + VIN);
@@ -171,7 +171,7 @@ public class MySQLTestModule implements DatabaseTestModule {
 
 			for(int i =0; i < cars.length; i++)
 			{
-				String sql = "DELETE FROM Cars " +
+				String sql = "DELETE FROM SimpleCar " +
 						"WHERE VIN = \"" + cars[i].getVin() + "\"";
 				stmt.executeUpdate(sql);
 			}
