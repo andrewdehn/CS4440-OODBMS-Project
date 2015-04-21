@@ -66,7 +66,7 @@ public class SimpleCarGenerator {
 		return array;
 	}
 	
-	private String randomAlphaString(Random rand, int size) {
+	String randomAlphaString(Random rand, int size) {
 		StringBuilder builder = new StringBuilder();
 		for(int i = 0; i < size; i++) {
 			builder.append(alpha[rand.nextInt(alpha.length)]);
@@ -74,7 +74,7 @@ public class SimpleCarGenerator {
 		return builder.toString();
 	}
 	
-	private String randomVin(Random rand) {
+	String randomVin(Random rand) {
 		StringBuilder builder = new StringBuilder();
 		for(int i = 0; i < 17; i++) {
 			builder.append(vin_alphanum[rand.nextInt(vin_alphanum.length)]);

@@ -1,5 +1,8 @@
 package edu.gatech.cs4440.spring2015.model;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Maintenance {
 	
 	protected String date;

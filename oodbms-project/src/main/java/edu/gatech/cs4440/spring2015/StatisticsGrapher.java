@@ -21,6 +21,8 @@ public class StatisticsGrapher {
 	static final int height = 480;
 
 	String dbName;
+	
+	String dataName;
 
 	Set<String> names;
 	Set<Integer> numbers = new HashSet<>();
@@ -37,7 +39,8 @@ public class StatisticsGrapher {
 	Map<String, Map<Integer, Double>> removeMeans = new HashMap<>();
 	Map<String, Map<Integer, Double>> removeSDs = new HashMap<>();
 
-	public StatisticsGrapher(String[] dbNames) {
+	public StatisticsGrapher(String dataName, String[] dbNames) {
+		this.dataName = dataName;
 		names = new HashSet<>();
 		for(String name : dbNames) {
 			names.add(name);
@@ -121,10 +124,10 @@ public class StatisticsGrapher {
 				removeMeanDataset, 
 				PlotOrientation.VERTICAL, true, true, false);
 		
-		File addFile = new File("add_mean.jpeg");
-		File updateFile = new File("update_mean.jpeg");
-		File queryFile = new File("query_mean.jpeg");
-		File removeFile = new File("remove_mean.jpeg");
+		File addFile = new File(dataName + "_add_mean.jpeg");
+		File updateFile = new File(dataName + "_update_mean.jpeg");
+		File queryFile = new File(dataName + "_query_mean.jpeg");
+		File removeFile = new File(dataName + "_remove_mean.jpeg");
 		
 		ChartUtilities.saveChartAsJPEG(addFile, addMeanLineChart, width, height);
 		ChartUtilities.saveChartAsJPEG(updateFile, updateMeanLineChart, width, height);

@@ -2,9 +2,13 @@ package edu.gatech.cs4440.spring2015;
 
 import java.io.IOException;
 
+import edu.gatech.cs4440.spring2015.generator.ComplexCarGenerator;
 import edu.gatech.cs4440.spring2015.generator.SimpleCarGenerator;
+import edu.gatech.cs4440.spring2015.model.ComplexCar;
 import edu.gatech.cs4440.spring2015.model.SimpleCar;
+import edu.gatech.cs4440.spring2015.testing.ComplexDatabaseTestModule;
 import edu.gatech.cs4440.spring2015.testing.DatabaseTestModule;
+import edu.gatech.cs4440.spring2015.testing.DummyComplexTestModule;
 import edu.gatech.cs4440.spring2015.testing.DummyTestModule;
 import edu.gatech.cs4440.spring2015.testing.ObjectDBTestModule;
 
@@ -21,6 +25,10 @@ public class Main {
 				new DummyTestModule(), 
 				new ObjectDBTestModule()
 		};
+		
+		ComplexDatabaseTestModule[] complexDbTestModules = {
+				new DummyComplexTestModule()
+		};
 
 		String[] dbNames = new String[dbTestModules.length];
 		for(int i = 0; i < dbTestModules.length; i++) {
@@ -28,21 +36,39 @@ public class Main {
 		}
 		
 		SimpleCarGenerator simpleCarGenerator = new SimpleCarGenerator();
-		StatisticsGrapher grapher = new StatisticsGrapher(dbNames);
+		ComplexCarGenerator complexCarGenerator = new ComplexCarGenerator();
 		
-		for(int objNum : objNums) {
-			SimpleCar[] simpleCars = simpleCarGenerator.generate(objNum);
+		StatisticsGrapher simpleGrapher = new StatisticsGrapher("SimpleCar", dbNames);
+		StatisticsGrapher complexGrapher = new StatisticsGrapher("ComplexCar", dbNames);
+		
+//		for(int objNum : objNums) {
+//			SimpleCar[] simpleCars = simpleCarGenerator.generate(objNum);
+//			
+//			for(DatabaseTestModule dbTestModule : dbTestModules) {
+//				DatabaseTest dbTest = new DatabaseTest(prestart, numTests, objNum, dbTestModule);
+//				DatabaseTest.TestResult result = dbTest.test(simpleCars);
+//				simpleGrapher.addTestResults(dbTestModule.databaseName(), objNum, result);
+//			}
+//			
+//			try {
+//				simpleGrapher.graph();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
+		
+		for(int objNum : objNums) { 
+			ComplexCar[] complexCars = complexCarGenerator.generate(objNum);
 			
-			for(DatabaseTestModule dbTestModule : dbTestModules) {
-				DatabaseTest dbTest = new DatabaseTest(prestart, numTests, objNum, dbTestModule);
-				DatabaseTest.TestResult result = dbTest.test(simpleCars);
-				grapher.addTestResults(dbTestModule.databaseName(), objNum, result);
-			}
-			
-			try {
-				grapher.graph();
-			} catch (IOException e) {
-				e.printStackTrace();
+			for(ComplexDatabaseTestModule complexDbTestModule : complexDbTestModules) {
+				ComplexDatabaseTest complexDbTest = new ComplexDatabaseTest(prestart, numTests, objNum, complexDbTestModule);
+				ComplexDatabaseTest.TestResult result = complexDbTest.test(complexCars);
+				// Add results here
+				if(result == null) {
+					throw new RuntimeException();
+				}
+				
+				// graph here
 			}
 		}
 

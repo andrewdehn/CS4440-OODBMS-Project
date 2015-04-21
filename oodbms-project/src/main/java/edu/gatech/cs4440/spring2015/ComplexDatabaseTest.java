@@ -3,22 +3,22 @@ package edu.gatech.cs4440.spring2015;
 import org.apache.commons.math3.stat.descriptive.moment.Mean;
 import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 
-import edu.gatech.cs4440.spring2015.model.SimpleCar;
+import edu.gatech.cs4440.spring2015.model.ComplexCar;
 import edu.gatech.cs4440.spring2015.testing.DatabaseTestException;
-import edu.gatech.cs4440.spring2015.testing.DatabaseTestModule;
+import edu.gatech.cs4440.spring2015.testing.ComplexDatabaseTestModule;
 
 /**
- * Performs a series of tests against a database supported by a DatabaseTestModule.
+ * Performs a series of tests against a database supported by a ComplexDatabaseTestModule.
  */
-public class DatabaseTest {
+public class ComplexDatabaseTest {
 
 	int prestart;
 	int numTests;
 	int numObjects;
-	DatabaseTestModule dbTestModule;
+	ComplexDatabaseTestModule dbTestModule;
 	
 	/**
-	 * Creates a {@link DatabaseTest} object.
+	 * Creates a {@link ComplexDatabaseTest} object.
 	 * 
 	 * @param prestart 
 	 * 		The number of operations to run to "warm up" the JVM.
@@ -32,7 +32,7 @@ public class DatabaseTest {
 	 * @param dbTestModule
 	 * 		The module that defines which database to test against.
 	 */
-	public DatabaseTest(int prestart, int numTests, int numObjects, DatabaseTestModule dbTestModule) {
+	public ComplexDatabaseTest(int prestart, int numTests, int numObjects, ComplexDatabaseTestModule dbTestModule) {
 		this.prestart = prestart;
 		this.numTests = numTests;
 		this.numObjects = numObjects;
@@ -42,7 +42,7 @@ public class DatabaseTest {
 	/** 
 	 * Performs the tests.
 	 */
-	public TestResult test(SimpleCar[] simpleCars) {
+	public TestResult test(ComplexCar[] ComplexCars) {
 		
 		int numExceptions = 0;
 		long time1, time2;
@@ -64,13 +64,13 @@ public class DatabaseTest {
 			e.printStackTrace();
 		}
 		
-		System.out.println("Running add tests for " + dbTestModule.databaseName() + " with " + simpleCars.length + " objects");
+		System.out.println("Running add tests for " + dbTestModule.databaseName() + " with " + ComplexCars.length + " objects");
 		numExceptions = 0;
 		for(int i = 0; i < numTests; i++) {
 			for(int j = 0; j < prestart; j++) {
 				try {
 					dbTestModule.clean();
-					dbTestModule.add(simpleCars);
+					dbTestModule.add(ComplexCars);
 				} catch (DatabaseTestException e) {
 					
 				}
@@ -86,7 +86,7 @@ public class DatabaseTest {
 				dbTestModule.clean();
 				
 				time1 = System.nanoTime();
-				dbTestModule.add(simpleCars);
+				dbTestModule.add(ComplexCars);
 				time2 = System.nanoTime();
 				
 				addTimes[i] = (((double) time2) - ((double) time1)) * 1e-6;
@@ -100,14 +100,14 @@ public class DatabaseTest {
 		}
 		
 		
-		System.out.println("Running update tests for " + dbTestModule.databaseName() + " with " + simpleCars.length + " objects");
+		System.out.println("Running update tests for " + dbTestModule.databaseName() + " with " + ComplexCars.length + " objects");
 		numExceptions = 0;
 		for(int i = 0; i < numTests; i++) {
 			for(int j = 0; j < prestart; j++) {
 				try {
 					dbTestModule.clean();
-					dbTestModule.add(simpleCars);
-					dbTestModule.update(simpleCars);
+					dbTestModule.add(ComplexCars);
+					dbTestModule.update(ComplexCars);
 				} catch (DatabaseTestException e) {
 					
 				}
@@ -121,10 +121,10 @@ public class DatabaseTest {
 			
 			try {
 				dbTestModule.clean();
-				dbTestModule.add(simpleCars);
+				dbTestModule.add(ComplexCars);
 				
 				time1 = System.nanoTime();
-				dbTestModule.update(simpleCars);
+				dbTestModule.update(ComplexCars);
 				time2 = System.nanoTime();
 				
 				updateTimes[i] = (((double) time2) - ((double) time1)) * 1e-6;
@@ -137,14 +137,14 @@ public class DatabaseTest {
 			}
 		}
 		
-		System.out.println("Running query tests for " + dbTestModule.databaseName() + " with " + simpleCars.length + " objects");
+		System.out.println("Running query tests for " + dbTestModule.databaseName() + " with " + ComplexCars.length + " objects");
 		numExceptions = 0;
 		for(int i = 0; i < numTests; i++) {
 			for(int j = 0; j < prestart; j++) {
 				try {
 					dbTestModule.clean();
-					dbTestModule.add(simpleCars);
-					dbTestModule.query(simpleCars);
+					dbTestModule.add(ComplexCars);
+					dbTestModule.query(ComplexCars);
 				} catch (DatabaseTestException e) {
 					
 				}
@@ -158,10 +158,10 @@ public class DatabaseTest {
 			
 			try {
 				dbTestModule.clean();
-				dbTestModule.add(simpleCars);
+				dbTestModule.add(ComplexCars);
 				
 				time1 = System.nanoTime();
-				dbTestModule.query(simpleCars);
+				dbTestModule.query(ComplexCars);
 				time2 = System.nanoTime();
 				
 				queryTimes[i] = (((double) time2) - ((double) time1)) * 1e-6;
@@ -174,14 +174,14 @@ public class DatabaseTest {
 			}
 		}
 		
-		System.out.println("Running remove tests for " + dbTestModule.databaseName() + " with " + simpleCars.length + " objects");
+		System.out.println("Running remove tests for " + dbTestModule.databaseName() + " with " + ComplexCars.length + " objects");
 		numExceptions = 0;
 		for(int i = 0; i < numTests; i++) {
 			for(int j = 0; j < prestart; j++) {
 				try {
 					dbTestModule.clean();
-					dbTestModule.add(simpleCars);
-					dbTestModule.remove(simpleCars);
+					dbTestModule.add(ComplexCars);
+					dbTestModule.remove(ComplexCars);
 				} catch (DatabaseTestException e) {
 					
 				}
@@ -195,10 +195,10 @@ public class DatabaseTest {
 			
 			try {
 				dbTestModule.clean();
-				dbTestModule.add(simpleCars);
+				dbTestModule.add(ComplexCars);
 				
 				time1 = System.nanoTime();
-				dbTestModule.remove(simpleCars);
+				dbTestModule.remove(ComplexCars);
 				time2 = System.nanoTime();
 				
 				removeTimes[i] = (((double) time2) - ((double) time1)) * 1e-6;
