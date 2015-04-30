@@ -34,12 +34,6 @@ public class PostgreSQLTestModule implements DatabaseTestModule {
         try {
         	pst = null;
 			con = DriverManager.getConnection(url, user, password);
-	        
-//	        rs = st.execute("CREATE TABLE Cars()");
-
-//	        if (rs.next()) {
-//	            System.out.println(rs.getString(1));
-//	        }
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -62,10 +56,6 @@ public class PostgreSQLTestModule implements DatabaseTestModule {
 	@Override
 	public void clean() throws DatabaseTestException {
 		try{
-//			st = con.createStatement();
-//			String stm = "DELETE FROM Cars";
-////			pst = con.prepareStatement(stm);
-//			st.executeQuery(stm);
 			
 			pst = con.prepareStatement("DELETE FROM Cars");
 			pst.executeUpdate();
@@ -74,7 +64,6 @@ public class PostgreSQLTestModule implements DatabaseTestModule {
 		{
 			throw new DatabaseTestException(e);
 		}
-
 	}
 
 	@Override
